@@ -59,7 +59,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseMiddleware<ProcessarSolicitacaoRespostaHTTP>(); //é um middleware personalizado criado para lidar com erros e exceções no aplicativo. Ele pode ser usado para centralizar o tratamento de erros em um único local, de modo que você não precise lidar com erros individualmente em todos os controladores ou camadas do aplicativo
-//app.UseMiddleware<BloquearAcessoVersaoApi>();
+ 
 
 
 app.UseHttpsRedirection();

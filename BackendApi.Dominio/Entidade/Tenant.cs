@@ -12,5 +12,8 @@ namespace BackendApi.Dominio.Entidade
         public string Descricao { get; set; } = string.Empty;
         public bool Inativo { get; set; }
         public Guid? Id_Imagem { get; set; }
+
+        public virtual ICollection<Ativo> Ativos { get; set; }
+
     }
 }

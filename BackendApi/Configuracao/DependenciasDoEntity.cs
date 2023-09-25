@@ -1,4 +1,5 @@
-﻿using BackendApi.Dominio.InterfaceRepositorio;
+﻿using BackendApi.Dominio.Entidade;
+using BackendApi.Dominio.InterfaceRepositorio;
 using BackendApi.Infra.Repositorio;
 
 namespace BackendApi.Configuracao
@@ -14,8 +15,13 @@ namespace BackendApi.Configuracao
             AtivoTipo(builder);
             Habilidade(builder);
             AtivoLocal(builder);
+            Ativo(builder);
         }
-
+        private static void Ativo(WebApplicationBuilder builder)
+        {
+            builder.Services.AddTransient<IAtivoRepositorio, AtivoRepositorio>();
+            builder.Services.AddScoped<IAtivoRepositorio, AtivoRepositorio>();
+        }
         private static void AtivoLocal(WebApplicationBuilder builder)
         {
             builder.Services.AddTransient<IAtivoLocalRepositorio, AtivoLocalRepositorio>();

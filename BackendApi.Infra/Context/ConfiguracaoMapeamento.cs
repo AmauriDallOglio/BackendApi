@@ -16,6 +16,7 @@ namespace BackendApi.Infra.Context
             builder.ApplyConfiguration(new AtivoTipoMapeamento());
             builder.ApplyConfiguration(new HabilidadeMapeamento());
             builder.ApplyConfiguration(new AtivoLocalMapeamento());
+            builder.ApplyConfiguration(new AtivoMapeamento());
         }
     }
 }

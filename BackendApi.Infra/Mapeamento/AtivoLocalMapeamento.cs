@@ -9,7 +9,6 @@ namespace BackendApi.Infra.Mapeamento
         public void Configure(EntityTypeBuilder<AtivoLocal> builder)
         {
             builder.ToTable("AtivoLocal"); // Substitua pelo nome da tabela no banco de dados, se necessário.
-
             builder.HasKey(e => e.Id); // Define a chave primária.
 
             builder.Property(e => e.Id)

@@ -17,6 +17,8 @@ namespace BackendApi.Infra.Mapeamento
             builder.Property(s => s.Id_Imagem).HasColumnName("Id_Imagem").HasColumnType("guid").IsRequired(false);
             builder.Property(s => s.Inativo).HasColumnName("Inativo").HasColumnType("bool").HasMaxLength(1).IsRequired(true);
 
+ 
+
         }
     }
 }

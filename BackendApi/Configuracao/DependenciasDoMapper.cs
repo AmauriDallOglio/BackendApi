@@ -14,6 +14,7 @@ namespace BackendApi.Configuracao
             cfg.AddProfile<AtivoTipoProfile>();
             cfg.AddProfile<HabilidadeProfile>();
             cfg.AddProfile<AtivoLocalProfile>();
+            cfg.AddProfile<AtivoProfile>();
 
             //Tenant(cfg);
             //Auditoria(cfg);

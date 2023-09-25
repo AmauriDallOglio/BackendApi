@@ -17,6 +17,7 @@ namespace BackendApi.Infra.Context
         public DbSet<AtivoTipo> AtivoTipo { get; set; }
         public DbSet<Habilidade> Habilidade { get; set; }
         public DbSet<AtivoLocal> AtivoLocal { get; set; }
+        public DbSet<Ativo> Ativo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
