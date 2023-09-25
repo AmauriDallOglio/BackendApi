@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Versioning;
+﻿using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Primitives;
 
 namespace BackendApi.Modelo
