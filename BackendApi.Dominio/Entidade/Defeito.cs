@@ -9,7 +9,7 @@ namespace BackendApi.Dominio.Entidade
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public Guid Id_Tenant { get; set; }
-        public virtual Tenant? Tenant { get; set; }
+        //public virtual Tenant? Tenant { get; set; }
 
         public string Referencia { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;

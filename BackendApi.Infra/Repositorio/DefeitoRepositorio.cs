@@ -19,11 +19,11 @@ namespace BackendApi.Infra.Repositorio
             var resultado = new List<Defeito>();
             if (string.IsNullOrEmpty(descricao))
             {
-                resultado = _contexto.Defeito.AsNoTracking().ToList();
+                resultado = _contexto.Defeito.ToList();
             }
             else
             {
-                resultado = _contexto.Defeito.AsNoTracking().Where(b => b.Descricao.Contains(descricao)).ToList();
+                resultado = _contexto.Defeito.Where(b => b.Descricao.Contains(descricao)).ToList();
             }
             return resultado;
         }

@@ -17,6 +17,9 @@ namespace BackendApi.Infra.Mapeamento
                 .HasDefaultValueSql("NEWSEQUENTIALID()")
                 .ValueGeneratedOnAdd();
 
+     
+
+
             builder.Property(e => e.Id_Tenant)
                 .HasColumnName("Id_Tenant")
                 .HasColumnType("uniqueidentifier")
@@ -54,3 +57,9 @@ namespace BackendApi.Infra.Mapeamento
         }
     }
 }
+
+
+
+
+
+ 

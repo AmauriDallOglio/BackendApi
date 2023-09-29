@@ -9,34 +9,27 @@ namespace BackendApi.Infra.Mapeamento
         public void Configure(EntityTypeBuilder<Ativo> builder)
         {
             builder.ToTable("Ativo");
-            builder.HasKey(e => e.Id);
+            builder.HasKey(a => a.Id);
 
-            builder.Property(e => e.Id)
-                .HasColumnName("Id")
-                .HasColumnType("UNIQUEIDENTIFIER")
-                .HasDefaultValueSql("NEWSEQUENTIALID()")
-                .ValueGeneratedOnAdd();
+            //builder.Property(e => e.Id)
+            //    .HasColumnName("Id")
+            //    .HasColumnType("UNIQUEIDENTIFIER")
+            //    .HasDefaultValueSql("NEWSEQUENTIALID()")
+            //    .ValueGeneratedOnAdd();
 
-            builder.Property(a => a.Id_Tenant)
-                .HasColumnName("Id_Tenant")
-                .HasColumnType("uniqueidentifier")
-                .IsRequired(true);
-
-
-            builder.HasOne(a => a.Tenant) // A propriedade virtual Tenant em Ativo
-                    .WithMany(t => t.Ativos) // A propriedade de navegação ICollection<Ativo> em Tenant
-                    .HasForeignKey(a => a.Id_Tenant); // A chave estrangeira em Ativo
+            // Configuração o relacionamento entre Ativo e Tenant
+            builder.Property(a => a.Id_Tenant).HasColumnName("Id_Tenant").HasColumnType("uniqueidentifier");
+            builder.HasOne(a => a.Tenant).WithMany().HasForeignKey(a => a.Id_Tenant);
 
 
-            builder.Property(a => a.Id_AtivoLocal)
-                .HasColumnName("Id_AtivoLocal")
-                .HasColumnType("uniqueidentifier")
-                .IsRequired(true);
+            // Configuração o relacionamento entre Ativo e AtivoLocal
+            builder.Property(a => a.Id_AtivoLocal).HasColumnName("Id_AtivoLocal").HasColumnType("uniqueidentifier");
+            builder.HasOne(a => a.AtivoLocal).WithMany().HasForeignKey(a => a.Id_AtivoLocal);
 
-            builder.Property(a => a.Id_AtivoTipo)
-                .HasColumnName("Id_AtivoTipo")
-                .HasColumnType("uniqueidentifier")
-                .IsRequired(true);
+            // Configuração o relacionamento entre Ativo e AtivoTipo
+            builder.Property(a => a.Id_AtivoTipo).HasColumnName("Id_AtivoTipo").HasColumnType("uniqueidentifier");
+            builder.HasOne(a => a.AtivoTipo).WithMany().HasForeignKey(a => a.Id_AtivoTipo);
+
 
             builder.Property(a => a.Id_AtivoPai)
                 .HasColumnName("Id_AtivoPai")
@@ -85,9 +78,6 @@ namespace BackendApi.Infra.Mapeamento
                 .HasColumnType("bool")
                 .HasMaxLength(1)
                 .IsRequired(true);
-
-      
-
 
             builder.Property(a => a.NumeroPatrimonial)
                 .HasColumnName("NumeroPatrimonial")

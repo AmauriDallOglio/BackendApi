@@ -19,14 +19,29 @@ namespace BackendApi.Infra.Repositorio
             var resultado = new List<Ativo>();
             if (string.IsNullOrEmpty(descricao))
             {
-                resultado = _contexto.Ativo.AsNoTracking().ToList();
+                resultado = _contexto.Ativo.Include(x => x.AtivoLocal)
+                                           .Include(x => x.Tenant)
+                                           .Include(x => x.AtivoTipo)
+                                           .ToList();
             }
             else
             {
-                resultado = _contexto.Ativo.AsNoTracking().Where(b => b.Descricao.Contains(descricao)).ToList();
+                resultado = _contexto.Ativo.Include(x => x.AtivoLocal)
+                                           .Include(x => x.Tenant)
+                                           .Include(x => x.AtivoTipo)
+                                           .Where(b => b.Descricao.Contains(descricao))
+                                           .ToList();
             }
             return resultado;
         }
+
+        //public Ativo ConsultarAtivosDeUmAtivoLocal(Guid ativoLocalId)
+        //{
+        //    Ativo ativoLocal = _contexto.Ativo.Include(x => x.Tenant).Where(al => al.Id == ativoLocalId).FirstOrDefault();
+
+        //    return ativoLocal;
+
+        //}
 
     }
 }

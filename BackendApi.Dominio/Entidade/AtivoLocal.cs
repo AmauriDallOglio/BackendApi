@@ -5,13 +5,16 @@ namespace BackendApi.Dominio.Entidade
 {
     public class AtivoLocal
     {
-        public Guid Id { get; set; } // Tipo: UNIQUEIDENTIFIER
-        public Guid Id_Tenant { get; set; } // Tipo: uniqueidentifier
-        public string Referencia { get; set; } = string.Empty;  // Tipo: varchar(50)
-        public string Area { get; set; } = string.Empty; // Tipo: varchar(50)
-        public string Setor { get; set; } = string.Empty; // Tipo: varchar(50)
-        public string Descricao { get; set; } = string.Empty; // Tipo: varchar(300)
-        public bool Inativo { get; set; } // Tipo: bit
+        public Guid Id { get; set; }  
+        public Guid Id_Tenant { get; set; }  
+        public string Referencia { get; set; } = string.Empty;  
+        public string Area { get; set; } = string.Empty; 
+        public string Setor { get; set; } = string.Empty; 
+        public string Descricao { get; set; } = string.Empty; 
+        public bool Inativo { get; set; }
+
+ 
+
 
         public AtivoLocal DadosDoIncluir()
         {

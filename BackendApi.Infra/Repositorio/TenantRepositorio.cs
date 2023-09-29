@@ -18,11 +18,11 @@ namespace BackendApi.Infra.Repositorio
             var resultado = new List<Tenant>();
             if (string.IsNullOrEmpty(descricao)) 
             {
-                resultado = _contexto.Tenant.AsNoTracking().ToList();
+                resultado = _contexto.Tenant.ToList();
             }
             else
             {
-                resultado = _contexto.Tenant.AsNoTracking().Where(b => b.Descricao.Contains(descricao)).ToList();
+                resultado = _contexto.Tenant.Where(b => b.Descricao.Contains(descricao)).ToList();
             }
             return resultado;
         }

@@ -5,8 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackendApi.Dominio.Entidade
 {
-    public class AtivoTipo
+    public class AtivoTipo : AuditableEntity<Guid>
     {
+        [Column("Id")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }

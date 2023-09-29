@@ -1,6 +1,4 @@
-﻿using BackendApi.Dominio.Entidade;
-
-namespace BackendApi.Dominio.Modelo
+﻿namespace BackendApi.Dominio.Modelo
 {
     public interface IRepositorioGenerico<TEntity> where TEntity : class
     {

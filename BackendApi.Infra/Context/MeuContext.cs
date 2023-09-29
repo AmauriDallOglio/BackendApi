@@ -1,4 +1,5 @@
 ﻿using BackendApi.Dominio.Entidade;
+using BackendApi.Infra.Mapeamento.Configuracao;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendApi.Infra.Context
@@ -7,7 +8,7 @@ namespace BackendApi.Infra.Context
     {
         public MeuContext(DbContextOptions<MeuContext> options) : base(options)
         {
-
+        
         }
 
         public DbSet<Tenant> Tenant { get; set; }
@@ -19,12 +20,12 @@ namespace BackendApi.Infra.Context
         public DbSet<AtivoLocal> AtivoLocal { get; set; }
         public DbSet<Ativo> Ativo { get; set; }
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ConfiguracaoMapeamento.Injetar(modelBuilder);
-
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

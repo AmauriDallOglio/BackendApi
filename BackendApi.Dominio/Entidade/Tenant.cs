@@ -13,7 +13,7 @@ namespace BackendApi.Dominio.Entidade
         public bool Inativo { get; set; }
         public Guid? Id_Imagem { get; set; }
 
-        public virtual ICollection<Ativo> Ativos { get; set; }
+       
 
     }
 }

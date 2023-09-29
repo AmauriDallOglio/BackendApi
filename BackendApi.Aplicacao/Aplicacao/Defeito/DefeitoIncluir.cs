@@ -5,7 +5,7 @@ namespace BackendApi.Aplicacao.Aplicacao.Defeito
 {
     public class DefeitoIncluir
     {
-        public class Request : IRequest<ResultadoOperacao<Response>>
+        public class Request : IRequest<ResultadoOperacao<DefeitoIncluirResponse>>
         {
             //public Guid Id { get; set; }
             public Guid Id_Tenant { get; set; }
@@ -16,7 +16,7 @@ namespace BackendApi.Aplicacao.Aplicacao.Defeito
 
         }
 
-        public class Response
+        public class DefeitoIncluirResponse
         {
             public Guid Id { get; set; }
             public Guid? Id_Imagem { get; set; }

@@ -19,11 +19,11 @@ namespace BackendApi.Infra.Repositorio
             var resultado = new List<Habilidade>();
             if (string.IsNullOrEmpty(descricao))
             {
-                resultado = _contexto.Habilidade.AsNoTracking().ToList();
+                resultado = _contexto.Habilidade.ToList();
             }
             else
             {
-                resultado = _contexto.Habilidade.AsNoTracking().Where(b => b.Descricao.Contains(descricao)).ToList();
+                resultado = _contexto.Habilidade.Where(b => b.Descricao.Contains(descricao)).ToList();
             }
             return resultado;
         }

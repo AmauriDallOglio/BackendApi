@@ -19,11 +19,11 @@ namespace BackendApi.Infra.Repositorio
             var resultado = new List<AtivoLocal>();
             if (string.IsNullOrEmpty(descricao))
             {
-                resultado = _contexto.AtivoLocal.AsNoTracking().ToList();
+                resultado = _contexto.AtivoLocal.ToList();
             }
             else
             {
-                resultado = _contexto.AtivoLocal.AsNoTracking().Where(b => b.Descricao.Contains(descricao)).ToList();
+                resultado = _contexto.AtivoLocal.Where(b => b.Descricao.Contains(descricao)).ToList();
             }
             return resultado;
         }

@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using BackendApi.Infra.Mapeamento;
-using BackendApi.Infra.Repositorio;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BackendApi.Infra.Context
+namespace BackendApi.Infra.Mapeamento.Configuracao
 {
     public class ConfiguracaoMapeamento
     {

@@ -2,6 +2,7 @@
 using BackendApi.Dominio.Modelo;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static BackendApi.Aplicacao.Aplicacao.Defeito.DefeitoIncluir;
 
 namespace BackendApi.Controllers
 {
@@ -15,33 +16,20 @@ namespace BackendApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("Ok"), ActionName("Ok")]
+        [HttpGet("Conexao"), ActionName("Conexao")]
         [ProducesResponseType(200), ProducesResponseType(400), ProducesResponseType(500)]
-        public string Ok()
+        public string Conexao()
         {
-            return "Blzz";
+            return "Ok";
         }
 
 
         [HttpPost("Inserir"), ActionName("Inserir")]
         [ProducesResponseType(200), ProducesResponseType(400), ProducesResponseType(500)]
-        public async Task<IActionResult> Inserir([FromBody] DefeitoIncluir.Request dadosEntrada)
+        public async Task<ResultadoOperacao<DefeitoIncluirResponse>> Inserir([FromBody] DefeitoIncluir.Request dadosEntrada)
         {
-            try
-            {
-                Guid tenantId = Guid.Parse("A31CF8A0-7B4D-EE11-A89E-F0D41578B814");
-                dadosEntrada.Id_Tenant = tenantId;
-                var response = _mediator.Send(dadosEntrada);
-                if (response.Result.Modelo.Id == null)
-                {
-                    return BadRequest(response.Result);
-                }
-                return Ok(response.Result.Modelo.Id.ToString());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var response = await _mediator.Send(dadosEntrada);
+            return response;
         }
 
         [HttpPut("Alterar"), ActionName("Alterar")]
@@ -50,6 +38,14 @@ namespace BackendApi.Controllers
             var response = _mediator.Send(dadosEntrada);
             return response;
         }
+
+        [HttpDelete("Excluir"), ActionName("Excluir")]
+        public async Task<IActionResult> Excluir([FromBody] DefeitoExcluir dadosEntrada)
+        {
+            var response = await _mediator.Send(dadosEntrada);
+            return Ok(response);
+        }
+
 
         [HttpGet("ListarTodos"), ActionName("ListarTodos")]
         public async Task<ActionResult<IEnumerable<DefeitoListarTodosResponse>>> ListarTodos([FromQuery] DefeitoListarTodosRequest dadosEntrada) //fromHead

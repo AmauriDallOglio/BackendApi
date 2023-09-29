@@ -9,11 +9,12 @@ namespace BackendApi.Aplicacao.Profiles
         public DefeitoProfile()
         {
             CreateMap<Defeito, DefeitoIncluir.Request>().ReverseMap();
-            CreateMap<Defeito, DefeitoIncluir.Response>().ReverseMap();
+            CreateMap<Defeito, DefeitoIncluir.DefeitoIncluirResponse>().ReverseMap();
             CreateMap<Defeito, DefeitoAlterar.Request>().ReverseMap();
             CreateMap<Defeito, DefeitoAlterar.Response>().ReverseMap();
             CreateMap<Defeito, DefeitoListarTodosRequest>().ReverseMap();
             CreateMap<Defeito, DefeitoListarTodosResponse>().ReverseMap();
+            CreateMap<Defeito, DefeitoExcluir>().ReverseMap();
         }
     }
 }

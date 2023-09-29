@@ -2,12 +2,17 @@
 {
     public class Ativo 
     {
-        public Guid Id { get; set; } // Id UNIQUEIDENTIFIER
-        public Guid Id_Tenant { get; set; } // Id_Tenant uniqueidentifier
+        public Guid Id { get; set; }
+
+        public Guid Id_Tenant { get; set; }
         public virtual Tenant Tenant { get; set; }
 
-        public Guid Id_AtivoLocal { get; set; } // Id_AtivoLocal uniqueidentifier
-        public Guid Id_AtivoTipo { get; set; } // Id_AtivoTipo uniqueidentifier
+        public Guid Id_AtivoLocal { get; set; }
+        public virtual AtivoLocal AtivoLocal { get; set; }
+
+        public Guid Id_AtivoTipo { get; set; }
+        public virtual AtivoTipo AtivoTipo { get; set; }
+
         public Guid? Id_AtivoPai { get; set; } // Id_AtivoPai uniqueidentifier (pode ser nulo)
         public string Referencia { get; set; } = string.Empty; // Referencia varchar(50)
         public string Descricao { get; set; } = string.Empty; // Descricao varchar(300)

@@ -5,7 +5,7 @@ namespace BackendApi.Aplicacao.Interface
 {
     internal interface IDefeitoInserirAplicacao
     {
-        public ResultadoOperacao<DefeitoIncluir.Response> CriarResultadoOperacao();
+        public ResultadoOperacao<DefeitoIncluir.DefeitoIncluirResponse> CriarResultadoOperacao();
         ResultadoOperacao<Dominio.Entidade.Defeito> ValidaMapeamento(Dominio.Entidade.Defeito entidade);
     }
 }

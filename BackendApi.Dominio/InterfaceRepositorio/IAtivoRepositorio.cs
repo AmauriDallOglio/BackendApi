@@ -6,5 +6,8 @@ namespace BackendApi.Dominio.InterfaceRepositorio
     public interface IAtivoRepositorio : IRepositorioGenerico<Ativo>
     {
         List<Ativo> BuscarTodosPorDescricao(string descricao);
+
+        //Ativo ConsultarAtivosDeUmAtivoLocal(Guid ativoLocalId);
+
     }
 }
