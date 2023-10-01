@@ -4,11 +4,10 @@ using BackendApi.Infra.Repositorio.Configuração;
 using BackendApi.Modelo;
 using MediatR;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 
-string filePath = "C:\\Amauri\\GitHub\\BackendApiConnection1.txt";
+string filePath = "C:\\Amauri\\GitHub\\BackendApiConnection2.txt";
 builder.Services.ConfigureDbContext(filePath);
 builder.Services.VersionamentoApi();
 builder.Services.AddControllers();  
@@ -18,14 +17,16 @@ builder.Services.DependenciasDoEntity();
 builder.Services.DependenciasDoMapper();
 builder.Services.AddCors(); //permitir um domínio acessem recursos em outro domínio
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies()); //são responsáveis por processar comandos e consultas
+builder.Services.ConfiguracaoSwaggerGen();
+builder.Services.AddCurrentUserService();
+
+
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.ConfiguracaoSwagger();
+
+
 app.UseMiddleware<ProcessarSolicitacaoRespostaHTTP>(); //criado para lidar com erros e exceções
 app.UseHttpsRedirection();
 app.UseAuthorization();
