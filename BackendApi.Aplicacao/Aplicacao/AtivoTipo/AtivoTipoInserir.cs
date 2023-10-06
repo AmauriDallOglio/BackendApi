@@ -51,7 +51,7 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoTipo
             {
                 var resposta = new Resposta
                 {
-                    Id = Guid.Parse("0")
+                    Id = request.Id_Tenant
                 };
 
                 resultadoOperacao.Sucesso = false;

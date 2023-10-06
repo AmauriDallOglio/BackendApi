@@ -1,15 +1,16 @@
-﻿using BackendApi.Dominio.Util;
+﻿using BackendApi.Dominio.Modelo;
+using BackendApi.Dominio.Util;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackendApi.Dominio.Entidade
 {
-    public class Auditoria
+    public class Auditoria : AuditableEntity<Guid>, ITenantObrigatorio //BaseIdTenantEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public Guid? Id_Tenant { get; set; }
+        public Guid Id_Tenant { get; set; }
        // public virtual Tenant? TenantAuditoria { get; set; }
         public string NomeTabela { get; set; } = string.Empty;
         public string ModoCrud { get; set; } = string.Empty;

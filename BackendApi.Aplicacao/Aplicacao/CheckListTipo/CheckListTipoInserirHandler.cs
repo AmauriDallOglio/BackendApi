@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using BackendApi.Aplicacao.Aplicacao.Auditoria;
-using BackendApi.Aplicacao.Interface;
 using BackendApi.Aplicacao.Modelo;
 using BackendApi.Dominio.InterfaceRepositorio;
 using BackendApi.Dominio.Modelo;
-using BackendApi.Dominio.Util;
 using BackendApi.Dominio.Validador;
 using MediatR;
 using Newtonsoft.Json;

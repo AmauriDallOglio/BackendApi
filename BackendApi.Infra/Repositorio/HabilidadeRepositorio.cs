@@ -2,7 +2,6 @@
 using BackendApi.Dominio.InterfaceRepositorio;
 using BackendApi.Infra.Context;
 using BackendApi.Infra.Modelo;
-using Microsoft.EntityFrameworkCore;
 
 namespace BackendApi.Infra.Repositorio
 {

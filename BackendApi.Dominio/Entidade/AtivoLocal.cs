@@ -3,7 +3,7 @@ using BackendApi.Dominio.Validador;
 
 namespace BackendApi.Dominio.Entidade
 {
-    public class AtivoLocal
+    public class AtivoLocal : AuditableEntity<Guid>, ITenantObrigatorio
     {
         public Guid Id { get; set; }  
         public Guid Id_Tenant { get; set; }  
@@ -13,9 +13,7 @@ namespace BackendApi.Dominio.Entidade
         public string Descricao { get; set; } = string.Empty; 
         public bool Inativo { get; set; }
 
- 
-
-
+  
         public AtivoLocal DadosDoIncluir()
         {
             this.Inativo = false;

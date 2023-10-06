@@ -12,7 +12,7 @@ namespace BackendApi.Aplicacao.Aplicacao.Auditoria
         public string Json { get; set; } = string.Empty;
 
         // O atributo genérico Json
-       /// public T Dados { get; set; }
+        //public T Dados { get; set; }
         //public string SerializarDados()
         //{
         //    return JsonConvert.SerializeObject(Dados);

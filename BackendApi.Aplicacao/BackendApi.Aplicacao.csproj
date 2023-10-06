@@ -16,4 +16,9 @@
     <ProjectReference Include="..\BackendApi.Dominio\BackendApi.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aplicacao\AtivoLocal\Command\" />
+    <Folder Include="Aplicacao\AtivoLocal\Queries\" />
+  </ItemGroup>
+
 </Project>

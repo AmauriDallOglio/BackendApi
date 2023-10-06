@@ -1,4 +1,5 @@
-﻿using BackendApi.Dominio.Modelo;
+﻿using BackendApi.Dominio.Entidade;
+using BackendApi.Dominio.Modelo;
 using BackendApi.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,8 +25,6 @@ namespace BackendApi.Infra.Modelo
             }
             return entidade;
         }
-
-      
 
         public TEntity Deletar(TEntity entidade)
         {

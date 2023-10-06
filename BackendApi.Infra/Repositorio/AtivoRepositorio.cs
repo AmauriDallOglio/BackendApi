@@ -20,14 +20,14 @@ namespace BackendApi.Infra.Repositorio
             if (string.IsNullOrEmpty(descricao))
             {
                 resultado = _contexto.Ativo.Include(x => x.AtivoLocal)
-                                           .Include(x => x.Tenant)
+                                           //.Include(x => x.Tenant)
                                            .Include(x => x.AtivoTipo)
                                            .ToList();
             }
             else
             {
                 resultado = _contexto.Ativo.Include(x => x.AtivoLocal)
-                                           .Include(x => x.Tenant)
+                                           //.Include(x => x.Tenant)
                                            .Include(x => x.AtivoTipo)
                                            .Where(b => b.Descricao.Contains(descricao))
                                            .ToList();

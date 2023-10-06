@@ -5,7 +5,7 @@ namespace BackendApi.Configuracao
 {
     public static class ConfiguracaoDbContextConfiguration
     {
-        public static void ConfigureDbContext(this IServiceCollection services, string filePath)
+        public static void ConfigurarDbContext(this IServiceCollection services, string filePath)
         {
             string connectionString = ReadConnectionStringFromFile(filePath);
             services.AddDbContext<MeuContext>(options => options.UseSqlServer(connectionString));

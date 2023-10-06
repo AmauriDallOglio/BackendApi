@@ -7,8 +7,6 @@ namespace BackendApi.Infra.Repositorio.Configuração
     {
         public static void DependenciasDoEntity(this IServiceCollection services)
         {
-            //services.AddDbContext<MeuContext>();
-            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddInterfaceRepositorio();
         }
 

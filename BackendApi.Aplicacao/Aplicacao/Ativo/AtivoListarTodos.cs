@@ -13,6 +13,10 @@ namespace BackendApi.Aplicacao.Aplicacao.Ativo
     public class AtivoListarTodosResponse : Dominio.Entidade.Ativo
     {
 
+
+         
+
+
     }
 
 

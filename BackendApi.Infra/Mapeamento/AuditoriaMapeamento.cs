@@ -13,7 +13,7 @@ namespace BackendApi.Infra.Mapeamento
             builder.Property(s => s.Id).IsRequired().HasColumnName("Id").HasColumnType("guid");
 
 
-            builder.Property(s => s.Id_Tenant).HasColumnName("Id_Tenant").HasColumnType("Guid").IsRequired(false);
+            builder.Property(s => s.Id_Tenant).HasColumnName("Id_Tenant").HasColumnType("Guid").IsRequired(true);
            // builder.HasOne(x => x.TenantAuditoria).WithMany().HasForeignKey(x => x.Id_Tenant);
             //builder.HasOne(s => s.TenantAuditoria).WithMany(a => a.Auditorias).HasForeignKey(e => e.Id_Tenant);
 

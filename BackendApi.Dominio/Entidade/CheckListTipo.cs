@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BackendApi.Dominio.Modelo;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackendApi.Dominio.Entidade
 {
-    public class CheckListTipo
+    public class CheckListTipo : AuditableEntity<Guid>, ITenantObrigatorio //BaseIdTenantEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

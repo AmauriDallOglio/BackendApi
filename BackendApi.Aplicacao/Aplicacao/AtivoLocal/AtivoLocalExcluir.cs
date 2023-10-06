@@ -37,37 +37,25 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
         {
             //Busca entidade no banco
             Dominio.Entidade.AtivoLocal entidadeBD = _repositorio.ObterPorId(request.Id);
-
-            //Atualiza dados com as informações da tela
-            _mapper.Map(request, entidadeBD);
-
-            //Valida os campos obrigatorio do mapeamento
-            ResultadoOperacao validador = entidadeBD.ValidaDados(entidadeBD);
-            if (validador.Sucesso == false)
-            {
-                var erro = ConverterMensagem(validador, entidadeBD);
-                return await Task.FromResult(erro);
-            }
-
             //Grava no bando de dados
             _repositorio.Deletar(entidadeBD);
-
             //Gera registro de historico na tabela de auditoria
             AuditoriaObjetoJson auditoriaObjetoJson = new AuditoriaObjetoJson();
             var objAuditoria = auditoriaObjetoJson.Criar(entidadeBD, entidadeBD.Id_Tenant, entidadeBD.Id, "AtivoLocal", ModoCruds.Excluir);
             _mediator.Send(objAuditoria.Result);
 
-            var sucesso = ConverterMensagem(validador, entidadeBD);
-            return await Task.FromResult(sucesso);
+            ResultadoOperacao<AtivoLocalExcluirResposta> resultadoOperacao = new ResultadoOperacao<AtivoLocalExcluirResposta>(null)
+            {
+                Sucesso = true,
+                Mensagem = "Sucesso",
+                Modelo = new AtivoLocalExcluirResposta
+                {
+                    Id = entidadeBD.Id
+                }
+            };
+            return await Task.FromResult(resultadoOperacao);
         }
 
-        public ResultadoOperacao<AtivoLocalExcluirResposta> ConverterMensagem(ResultadoOperacao resultado, Dominio.Entidade.AtivoLocal entidadeBD)
-        {
-            var retorno = new ResultadoOperacao<AtivoLocalExcluirResposta>(new AtivoLocalExcluirResposta { Id = entidadeBD.Id });
-            retorno.Sucesso = resultado.Sucesso;
-            retorno.Mensagem = resultado.Mensagem;
-            return retorno;
-        }
     }
 
 }

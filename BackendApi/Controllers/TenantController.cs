@@ -1,5 +1,4 @@
-﻿using BackendApi.Aplicacao.Aplicacao.Defeito;
-using BackendApi.Aplicacao.Aplicacao.Tenant;
+﻿using BackendApi.Aplicacao.Aplicacao.Tenant;
 using BackendApi.Dominio.Modelo;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,19 +30,8 @@ namespace BackendApi.Controllers
         [ProducesResponseType(200), ProducesResponseType(400), ProducesResponseType(500)]
         public async Task<TenantInserirResponse> Inserir([FromBody] TenantInserirRequest dadosEntrada)
         {
-            //try
-            //{
             var response = _mediator.Send(dadosEntrada);
-            //    if (response.Result.Sucesso == false)
-            //    {
-            //        return BadRequest(response.Result.Mensagem);
-            //    }
-              return response.Result.Modelo; // Ok(response.Result.Modelo.Id.ToString());
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex.Message);
-            //}
+            return response.Result.Modelo; // Ok(response.Result.Modelo.Id.ToString());
         }
 
         [HttpPut("Alterar"), ActionName("Alterar")]

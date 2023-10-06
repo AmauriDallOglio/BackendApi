@@ -1,6 +1,8 @@
-﻿namespace BackendApi.Dominio.Entidade
+﻿using BackendApi.Dominio.Modelo;
+
+namespace BackendApi.Dominio.Entidade
 {
-    public class Ativo 
+    public class Ativo : AuditableEntity<Guid>, ITenantObrigatorio //BaseIdTenantEntity
     {
         public Guid Id { get; set; }
 

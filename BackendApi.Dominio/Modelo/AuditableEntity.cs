@@ -1,4 +1,6 @@
-﻿namespace BackendApi.Dominio.Modelo
+﻿using BackendApi.Dominio.Entidade;
+
+namespace BackendApi.Dominio.Modelo
 {
     public abstract class AuditableEntity<TId> : IAuditableEntity<TId>
     {

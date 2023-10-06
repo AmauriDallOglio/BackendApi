@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BackendApi.Aplicacao.Aplicacao.Auditoria;
+using BackendApi.Dominio.Entidade;
 using BackendApi.Dominio.InterfaceRepositorio;
 using BackendApi.Dominio.Modelo;
 using BackendApi.Dominio.Util;
@@ -9,7 +10,6 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
 {
     public class AtivoLocalInserir : IRequest<ResultadoOperacao<AtivoLocalInserirResposta>>
     {
-        public Guid Id_Tenant { get; set; }
         public string Referencia { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
         public string Area { get; set; } = string.Empty; 
@@ -28,16 +28,19 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
         private readonly IAtivoLocalRepositorio _repositorio;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
+        private readonly Global _global;
 
-        public AtivoLocalInserirHandler(IMediator mediator, IMapper mapper, IAtivoLocalRepositorio repository)
+        public AtivoLocalInserirHandler(IMediator mediator, IMapper mapper, IAtivoLocalRepositorio repository, Global global)
         {
             _repositorio = repository;
             _mapper = mapper;
             _mediator = mediator;
+            _global = global;
         }
 
         public Task<ResultadoOperacao<AtivoLocalInserirResposta>> Handle(AtivoLocalInserir request, CancellationToken cancellationToken)
         {
+     
             ResultadoOperacao<AtivoLocalInserirResposta> resultadoOperacao = new ResultadoOperacao<AtivoLocalInserirResposta>(null)
             {
                 Sucesso = true,
@@ -45,6 +48,7 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
             };
 
             var entidade = _mapper.Map<Dominio.Entidade.AtivoLocal>(request);
+            //entidade.Id_Tenant = _global.Id_Tenant_Global;
             entidade = entidade.DadosDoIncluir();
 
             //Valida os campos obrigatorio do mapeamento
@@ -79,5 +83,11 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
 
             return Task.FromResult(resultadoOperacao);
         }
+
+       
+
     }
+     
+
+
 }
