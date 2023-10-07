@@ -1,7 +1,11 @@
-﻿using BackendApi.Aplicacao.Aplicacao.AtivoLocal;
+﻿using BackendApi.Aplicacao.Aplicacao.AtivoLocal.Command;
+using BackendApi.Aplicacao.Aplicacao.AtivoLocal.Queries;
 using BackendApi.Dominio.Modelo;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BackendApi.Controllers
 {
@@ -11,9 +15,13 @@ namespace BackendApi.Controllers
     public class AtivoLocalController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public AtivoLocalController(IMediator mediator)
+        private readonly IValidator<AtivoLocalInserirCommand> _validador;
+        private readonly IStringLocalizer<AtivoLocalController> _localizer;
+        public AtivoLocalController(IMediator mediator, IValidator<AtivoLocalInserirCommand> validador, IStringLocalizer<AtivoLocalController> localizer)
         {
             _mediator = mediator;
+            _validador = validador;
+            _localizer = localizer;
         }
 
         [HttpGet("Conexao"), ActionName("Conexao")]
@@ -30,15 +38,23 @@ namespace BackendApi.Controllers
 
         [HttpPost("Inserir"), ActionName("Inserir")]
         [ProducesResponseType(200), ProducesResponseType(400), ProducesResponseType(500)]
-        public async Task<ResultadoOperacao<AtivoLocalInserirResposta>> Inserir([FromBody] AtivoLocalInserir dadosEntrada)
+        public async Task<IActionResult> Inserir([FromBody] AtivoLocalInserirCommand dadosEntrada)
         {
+            var resultadoValidacao = _validador.Validate(dadosEntrada);
+
+            if (!resultadoValidacao.IsValid)
+            {
+                var erros = resultadoValidacao.Errors.Select(x => _localizer[x.ErrorMessage]);
+                return BadRequest(erros);
+            }
+
             var response = await _mediator.Send(dadosEntrada);
-            return response;
+            return Ok(response);
         }
  
 
         [HttpPut("Alterar"), ActionName("Alterar")]
-        public async Task<IActionResult> Alterar([FromBody] AtivoLocalAlterar dadosEntrada)
+        public async Task<IActionResult> Alterar([FromBody] AtivoLocalAlterarCommand dadosEntrada)
         {
             var response = await _mediator.Send(dadosEntrada);
             if (response.Sucesso == false)
@@ -49,7 +65,7 @@ namespace BackendApi.Controllers
         }
 
         [HttpDelete("Excluir"), ActionName("Excluir")]
-        public async Task<IActionResult> Excluir([FromBody] AtivoLocalExcluir dadosEntrada)
+        public async Task<IActionResult> Excluir([FromBody] AtivoLocalExcluirCommand dadosEntrada)
         {
             var response = await _mediator.Send(dadosEntrada);
             return Ok(response);
@@ -58,9 +74,9 @@ namespace BackendApi.Controllers
 
 
         [HttpGet("ListarTodos"), ActionName("ListarTodos")]
-        public async Task<ActionResult<IEnumerable<AtivoLocalListarTodosResponse>>> ListarTodos([FromQuery] AtivoLocalListarTodos dadosEntrada) 
+        public async Task<ActionResult<IEnumerable<AtivoLocalListarTodosResponseQueries>>> ListarTodos([FromQuery] AtivoLocalListarTodosQueries dadosEntrada) 
         {
-            RetornoPaginadoGenerico<AtivoLocalListarTodosResponse> resultado = await _mediator.Send(dadosEntrada);
+            RetornoPaginadoGenerico<AtivoLocalListarTodosResponseQueries> resultado = await _mediator.Send(dadosEntrada);
             var lista = resultado.Modelos.ToList();
             return Ok(lista);
         }

@@ -5,9 +5,9 @@ using BackendApi.Dominio.Modelo;
 using BackendApi.Dominio.Util;
 using MediatR;
 
-namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
+namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal.Command
 {
-    public class AtivoLocalExcluir : IRequest<ResultadoOperacao<AtivoLocalExcluirResposta>>
+    public class AtivoLocalExcluirCommand : IRequest<ResultadoOperacao<AtivoLocalExcluirResposta>>
     {
 
         public Guid Id { get; set; }
@@ -20,7 +20,7 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
 
     }
 
-    internal class AtivoLocalExcluirHandler : IRequestHandler<AtivoLocalExcluir, ResultadoOperacao<AtivoLocalExcluirResposta>>
+    internal class AtivoLocalExcluirHandler : IRequestHandler<AtivoLocalExcluirCommand, ResultadoOperacao<AtivoLocalExcluirResposta>>
     {
         private readonly IAtivoLocalRepositorio _repositorio;
         private readonly IMapper _mapper;
@@ -33,7 +33,7 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
             _mediator = mediator;
         }
 
-        public async Task<ResultadoOperacao<AtivoLocalExcluirResposta>> Handle(AtivoLocalExcluir request, CancellationToken cancellationToken)
+        public async Task<ResultadoOperacao<AtivoLocalExcluirResposta>> Handle(AtivoLocalExcluirCommand request, CancellationToken cancellationToken)
         {
             //Busca entidade no banco
             Dominio.Entidade.AtivoLocal entidadeBD = _repositorio.ObterPorId(request.Id);

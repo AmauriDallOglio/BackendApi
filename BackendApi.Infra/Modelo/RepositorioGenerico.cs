@@ -1,5 +1,4 @@
-﻿using BackendApi.Dominio.Entidade;
-using BackendApi.Dominio.Modelo;
+﻿using BackendApi.Dominio.Modelo;
 using BackendApi.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,8 +7,6 @@ namespace BackendApi.Infra.Modelo
     public class RepositorioGenerico<TEntity> : IRepositorioGenerico<TEntity> where TEntity : class
     {
         private readonly MeuContext _dbContext;
-        private bool _disposed;
-
         public RepositorioGenerico(MeuContext dbContext)
         {
             _dbContext = dbContext;
@@ -33,9 +30,11 @@ namespace BackendApi.Infra.Modelo
             return entidade;
         }
 
+
         public TEntity Inserir(TEntity entidade, bool finalizar)
         {
             _dbContext.Set<TEntity>().Add(entidade);
+            _dbContext.MetodoInserir();
             if (finalizar)
             {
                 Comitar();
@@ -59,7 +58,10 @@ namespace BackendApi.Infra.Modelo
        
         }
 
- 
+
+
+
+
         //public Task Rollback()
         //{
         //    _dbContext.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());

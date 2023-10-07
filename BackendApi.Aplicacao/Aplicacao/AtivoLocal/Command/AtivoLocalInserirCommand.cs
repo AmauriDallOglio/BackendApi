@@ -6,9 +6,9 @@ using BackendApi.Dominio.Modelo;
 using BackendApi.Dominio.Util;
 using MediatR;
 
-namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
+namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal.Command
 {
-    public class AtivoLocalInserir : IRequest<ResultadoOperacao<AtivoLocalInserirResposta>>
+    public class AtivoLocalInserirCommand : IRequest<ResultadoOperacao<AtivoLocalInserirResposta>>
     {
         public string Referencia { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
@@ -23,22 +23,22 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
     }
 
 
-    internal class AtivoLocalInserirHandler : IRequestHandler<AtivoLocalInserir, ResultadoOperacao<AtivoLocalInserirResposta>>
+    internal class AtivoLocalInserirHandler : IRequestHandler<AtivoLocalInserirCommand, ResultadoOperacao<AtivoLocalInserirResposta>>
     {
         private readonly IAtivoLocalRepositorio _repositorio;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
-        private readonly Global _global;
 
-        public AtivoLocalInserirHandler(IMediator mediator, IMapper mapper, IAtivoLocalRepositorio repository, Global global)
+
+        public AtivoLocalInserirHandler(IMediator mediator, IMapper mapper, IAtivoLocalRepositorio repository)
         {
             _repositorio = repository;
             _mapper = mapper;
             _mediator = mediator;
-            _global = global;
+    
         }
 
-        public Task<ResultadoOperacao<AtivoLocalInserirResposta>> Handle(AtivoLocalInserir request, CancellationToken cancellationToken)
+        public Task<ResultadoOperacao<AtivoLocalInserirResposta>> Handle(AtivoLocalInserirCommand request, CancellationToken cancellationToken)
         {
      
             ResultadoOperacao<AtivoLocalInserirResposta> resultadoOperacao = new ResultadoOperacao<AtivoLocalInserirResposta>(null)
@@ -57,7 +57,7 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
             {
                 var resposta = new AtivoLocalInserirResposta
                 {
-                    Id = Guid.Parse("0")
+                    //Id = Guid.Parse("0")
                 };
 
                 resultadoOperacao.Sucesso = false;

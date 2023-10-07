@@ -1,8 +1,10 @@
 using BackendApi.Aplicacao.Profiles.DependenciasDoMapper;
 using BackendApi.Configuracao;
+using BackendApi.Infra.Modelo;
 using BackendApi.Infra.Repositorio.Configuração;
 using BackendApi.Modelo;
 using MediatR;
+using BackendApi.Aplicacao.Validador.Configuracao;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,11 +16,13 @@ var configuration = new ConfigurationBuilder()
     .Build();
 
 
-string filePath = "C:\\Amauri\\GitHub\\BackendApiConnection1.txt";
+string filePath = "C:\\Amauri\\GitHub\\BackendApiConnection2.txt";
 builder.Services.ConfiguracaoStartupInicial(configuration);
 builder.Services.ConfigurarDbContext(filePath);
 builder.Services.DependenciasDoEntity();
 builder.Services.DependenciasDoMapper();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.DependenciasDoValidador();
 builder.Services.VersionamentoApi();
 builder.Services.AddControllers();  
 builder.Services.AddEndpointsApiExplorer(); //importante para gerar automaticamente a documentação do Swagger com base nos controladores e ações definidos na API.

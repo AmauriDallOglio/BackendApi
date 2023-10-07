@@ -3,19 +3,19 @@ using BackendApi.Dominio.InterfaceRepositorio;
 using BackendApi.Dominio.Modelo;
 using MediatR;
 
-namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
+namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal.Queries
 {
-    public class AtivoLocalListarTodos : IRequest<RetornoPaginadoGenerico<AtivoLocalListarTodosResponse>>
+    public class AtivoLocalListarTodosQueries : IRequest<RetornoPaginadoGenerico<AtivoLocalListarTodosResponseQueries>>
     {
         public string? Descricao { get; set; }
     }
 
-    public class AtivoLocalListarTodosResponse : Dominio.Entidade.AtivoLocal
+    public class AtivoLocalListarTodosResponseQueries : Dominio.Entidade.AtivoLocal
     {
 
     }
 
-    public class AtivoLocalListarTodosHandler : IRequestHandler<AtivoLocalListarTodos, RetornoPaginadoGenerico<AtivoLocalListarTodosResponse>>
+    public class AtivoLocalListarTodosHandler : IRequestHandler<AtivoLocalListarTodosQueries, RetornoPaginadoGenerico<AtivoLocalListarTodosResponseQueries>>
     {
         private readonly IAtivoLocalRepositorio _repositorio;
         private readonly IMapper _mapper;
@@ -26,11 +26,11 @@ namespace BackendApi.Aplicacao.Aplicacao.AtivoLocal
             _mapper = mapper;
         }
 
-        public async Task<RetornoPaginadoGenerico<AtivoLocalListarTodosResponse>> Handle(AtivoLocalListarTodos request, CancellationToken cancellationToken)
+        public async Task<RetornoPaginadoGenerico<AtivoLocalListarTodosResponseQueries>> Handle(AtivoLocalListarTodosQueries request, CancellationToken cancellationToken)
         {
             List<Dominio.Entidade.AtivoLocal> lista = _repositorio.BuscarTodosPorDescricao(request.Descricao);
-            var listaDto = _mapper.Map<List<AtivoLocalListarTodosResponse>>(lista);
-            RetornoPaginadoGenerico<AtivoLocalListarTodosResponse> retornoPaginado = new RetornoPaginadoGenerico<AtivoLocalListarTodosResponse>
+            var listaDto = _mapper.Map<List<AtivoLocalListarTodosResponseQueries>>(lista);
+            RetornoPaginadoGenerico<AtivoLocalListarTodosResponseQueries> retornoPaginado = new RetornoPaginadoGenerico<AtivoLocalListarTodosResponseQueries>
             {
                 Modelos = listaDto,
                 ItemPorPagina = 1,

@@ -1,10 +1,7 @@
 ﻿using BackendApi.Dominio.Entidade;
-using BackendApi.Dominio.Modelo;
 using BackendApi.Infra.Mapeamento.Configuracao;
-using BackendApi.Infra.Modelo;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using System.Threading;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BackendApi.Infra.Context
 {
@@ -37,47 +34,47 @@ namespace BackendApi.Infra.Context
             base.OnModelCreating(modelBuilder);
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
-        {
-            var teste = "";
 
-            foreach (var entry in ChangeTracker.Entries<Dominio.Modelo.IAuditableEntity>().ToList())
+
+        public void MetodoInserir()
+        {
+            foreach (EntityEntry entry in ChangeTracker.Entries<Dominio.Modelo.IAuditableEntity>().ToList())
             {
+                object objeto = entry.Entity;
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        CompleteForCreated(entry.Entity);
-                        break;
-
-                    case EntityState.Modified:
-                        CompleteForUpdated(entry.Entity);
+                        InserirInformacaoGlobal(objeto);
                         break;
                 }
             }
-            if (_Global.Id_Usuario == null)
-            {
-                return await base.SaveChangesAsync(cancellationToken);
-            }
-            else
-            {
-                return await base.SaveChangesAsync(true, cancellationToken);
-            }
+        }
 
+        public void MetodoAlterar()
+        {
+            foreach (EntityEntry entry in ChangeTracker.Entries<Dominio.Modelo.IAuditableEntity>().ToList())
+            {
+                object objeto = entry.Entity;
+                switch (entry.State)
+                {
+                    case EntityState.Modified:
+                        InserirInformacaoGlobal(objeto);
+                        break;
+                }
+            }
         }
 
 
-        protected void CompleteForCreated(object entity)
+ 
+
+        protected void InserirInformacaoGlobal(object entity)
         {
             if (entity is Dominio.Modelo.ITenantObrigatorio)
-                SetTenantId(entity as Dominio.Modelo.ITenantObrigatorio);
+                SetaTenantId(entity as Dominio.Modelo.ITenantObrigatorio);
         }
 
-        protected void CompleteForUpdated(object entity)
-        {
-            if (entity is Dominio.Modelo.ITenantObrigatorio)
-                SetTenantId(entity as Dominio.Modelo.ITenantObrigatorio);
-        }
-        private void SetTenantId(Dominio.Modelo.ITenantObrigatorio entity)
+    
+        private void SetaTenantId(Dominio.Modelo.ITenantObrigatorio entity)
         {
             if (Guid.Empty.Equals(entity.Id_Tenant))
                 entity.Id_Tenant = _Global.Id_Tenant_Global;
